@@ -48,7 +48,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   bool showMediumSizeLayout = false;
   bool showLargeSizeLayout = false;
 
-  int screenIndex = ScreenSelected.component.value;
+  int screenIndex = ScreenSelected.dataStruct.value;
 
   @override
   initState() {
@@ -111,35 +111,35 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget createScreenFor(
       ScreenSelected screenSelected, bool showNavBarExample) {
     switch (screenSelected) {
-      case ScreenSelected.component:
-        return Expanded(
-          child: OneTwoTransition(
-            animation: railAnimation,
-            one: FirstComponentList(
-                showNavBottomBar: showNavBarExample,
-                scaffoldKey: scaffoldKey,
-                showSecondList: showMediumSizeLayout || showLargeSizeLayout),
-            two: SecondComponentList(
-              scaffoldKey: scaffoldKey,
-            ),
-          ),
-        );
-      case ScreenSelected.color:
-        return const ColorPalettesScreen();
-      case ScreenSelected.typography:
-        return const TypographyScreen();
-      case ScreenSelected.elevation:
-        return const ElevationScreen();
+      // case ScreenSelected.component:
+      //   return Expanded(
+      //     child: OneTwoTransition(
+      //       animation: railAnimation,
+      //       one: FirstComponentList(
+      //           showNavBottomBar: showNavBarExample,
+      //           scaffoldKey: scaffoldKey,
+      //           showSecondList: showMediumSizeLayout || showLargeSizeLayout),
+      //       two: SecondComponentList(
+      //         scaffoldKey: scaffoldKey,
+      //       ),
+      //     ),
+      //   );
       case ScreenSelected.dataStruct:
         return const DataStructureScreen();
+      case ScreenSelected.color:
+        return const ColorPalettesScreen();
+      // case ScreenSelected.typography:
+      //   return const TypographyScreen();
+      // case ScreenSelected.elevation:
+      //   return const ElevationScreen();
     }
   }
 
   PreferredSizeWidget createAppBar() {
     return AppBar(
       title: widget.useMaterial3
-          ? const Text('Material 3')
-          : const Text('Material 2'),
+          ? const Text('Floyd算法动态演示')
+          : const Text('Floyd算法动态演示'),
       actions: !showMediumSizeLayout && !showLargeSizeLayout
           ? [
               _BrightnessButton(

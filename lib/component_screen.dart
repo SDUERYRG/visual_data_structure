@@ -1064,15 +1064,9 @@ class _ProgressIndicatorsState extends State<ProgressIndicators> {
 const List<NavigationDestination> appBarDestinations = [
   NavigationDestination(
     tooltip: '',
-    icon: Icon(Icons.widgets_outlined),
-    label: 'Components',
-    selectedIcon: Icon(Icons.widgets),
-  ),
-  NavigationDestination(
-    tooltip: '',
-    icon: Icon(Icons.format_paint_outlined),
-    label: 'Color',
-    selectedIcon: Icon(Icons.format_paint),
+    icon: Icon(Icons.invert_colors_on_outlined),
+    label: '我的数据结构课设',
+    selectedIcon: Icon(Icons.opacity),
   ),
   NavigationDestination(
     tooltip: '',
@@ -1080,18 +1074,6 @@ const List<NavigationDestination> appBarDestinations = [
     label: 'Typography',
     selectedIcon: Icon(Icons.text_snippet),
   ),
-  NavigationDestination(
-    tooltip: '',
-    icon: Icon(Icons.invert_colors_on_outlined),
-    label: 'Elevation',
-    selectedIcon: Icon(Icons.opacity),
-  ),
-  NavigationDestination(
-    tooltip: '',
-    icon: Icon(Icons.invert_colors_on_outlined),
-    label: '我的数据结构课设',
-    selectedIcon: Icon(Icons.opacity),
-  )
 ];
 
 const List<Widget> exampleBarDestinations = [

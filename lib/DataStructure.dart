@@ -4,13 +4,11 @@
 
 import 'dart:ui' as ui;
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
 import 'dart:math' as math;
 import 'dart:core';
-
 import 'component_screen.dart';
 
 List<List<double>> data = List.empty();
@@ -41,16 +39,23 @@ class _DataStructureScreenState extends State<DataStructureScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Color selectedColor = Theme.of(context).primaryColor;
+    ThemeData lightTheme = ThemeData(
+      colorSchemeSeed: selectedColor,
+      brightness: Brightness.light,
+    );
+
     return Expanded(
       child: Row(
         children: <Widget>[
           Container(
+            color: lightTheme.colorScheme.secondaryContainer,
             height: 800,
             width: 600,
             child: Center(
               child: CustomPaint(
                 size: Size(600, 600),
-                painter: Mypainter(),
+                painter: Mypainter(colorScheme: lightTheme.colorScheme),
               ),
             ),
           ),
@@ -209,6 +214,7 @@ class MyCustomForm extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 5, // 设置你想要的宽度
               child: TextField(
                 decoration: InputDecoration(
+                  hintText: '输入加权有向图节点数目',
                   border: OutlineInputBorder(),
                 ),
                 controller: myController,
@@ -275,7 +281,7 @@ class MyCustomForm extends StatelessWidget {
                               data[0][0] = 0;
                               path[0][0] = 0;
                               onDataChanged(data);
-                              int n = data.length;
+
                               for (int i = 1; i <= count; i++) {
                                 for (int j = 1; j <= count; j++) {
                                   if (i != j && data[i][j] != double.infinity) {
@@ -380,8 +386,13 @@ class DynamicTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color selectedColor = Theme.of(context).primaryColor;
+    ThemeData lightTheme = ThemeData(
+      colorSchemeSeed: selectedColor,
+      brightness: Brightness.light,
+    );
     return Table(
-      border: TableBorder.all(color: Colors.black),
+      border: TableBorder.all(color: lightTheme.colorScheme.onPrimaryContainer),
       children: data.map((row) {
         return TableRow(
           children: row.map((cell) {
@@ -428,18 +439,6 @@ class CustomImagePainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) =>
       this != oldDelegate;
-
-  // void drawBackground(Canvas canvas) {
-  //   Paint _linePaint = new Paint()
-  //     ..color = Colors.blue
-  //     ..style = PaintingStyle.fill
-  //     ..isAntiAlias = true
-  //     ..strokeCap = StrokeCap.round
-  //     ..strokeWidth = 30.0;
-
-  //   // 绘制图片
-  //   canvas.drawImage(image, Offset(0, 0), _linePaint); // 直接画图
-  // }
 
   void drawInner(Canvas canvas) {
     final textStyle = ui.TextStyle(
@@ -536,6 +535,8 @@ class CustomImagePainter extends CustomPainter {
 }
 
 class Mypainter extends CustomPainter {
+  const Mypainter({required this.colorScheme});
+  final ColorScheme colorScheme;
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
   @override
@@ -567,8 +568,8 @@ class Mypainter extends CustomPainter {
         text: TextSpan(
           text: '$i',
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
+            color: colorScheme.primary,
+            fontSize: 25,
           ),
         ),
         textDirection: TextDirection.ltr,
@@ -658,7 +659,7 @@ class Mypainter extends CustomPainter {
     var paint = Paint()
       ..isAntiAlias = true
       ..style = PaintingStyle.fill //填充
-      ..color = Color(0xFFDCC48C);
+      ..color = colorScheme.primaryContainer;
     canvas.drawRect(rect, paint);
   }
 }
